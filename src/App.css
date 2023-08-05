@@ -111,16 +111,21 @@ input[type='number'] {
   margin-bottom: 40px;
 }
 
-.list li {
+.list li{
   background-color: #fff;
   box-shadow: var(--box-shadow);
   color: #333;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   position: relative;
   padding: 10px;
   margin: 10px 0;
 }
+
+.list li #amount{
+  float: right;
+}
+
 
 .list li.plus {
   border-right: 5px solid #2ecc71;
@@ -159,7 +164,7 @@ input[type='number'] {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translate(+120%, -50%);
+    transform: translate(+110%, -50%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }

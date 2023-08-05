@@ -29,7 +29,8 @@ const AddTransaction = () => {
       const newTransaction={
         id:nextId++,
         text,
-        amount:parseInt(amount)
+        amount:parseInt(amount),
+        date:Date()
       }
       dispatch({type:'ADD',payload:newTransaction});
 

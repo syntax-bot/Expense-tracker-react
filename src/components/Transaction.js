@@ -9,6 +9,9 @@ const Transaction = ({transaction}) => {
     const [isEditing, setIsEditing] = useState(false);
     const [text,setText]=useState(transaction.text);
     const [amount,setAmount]=useState(transaction.amount);
+    const [mouseIn,setMouseIN]=useState(false);
+
+    
     let sign;
     let ListClass;
     if(transaction.amount<0){
@@ -23,7 +26,8 @@ const Transaction = ({transaction}) => {
     let ListContent;
     if(isEditing){
       
-      ListContent=(<li className={ListClass}>
+      ListContent=(
+        <li className={ListClass}>
       <form onSubmit={(e)=>{
         e.preventDefault();
         if(text.length===0 || amount.length===0){
@@ -41,7 +45,8 @@ const Transaction = ({transaction}) => {
         const editedTransaction={
           id:transaction.id,
           text,
-          amount:+amount
+          amount:+amount,
+          date:Date()
         }
         dispatch({type:"EDIT",payload:editedTransaction});
         setIsEditing(false);
@@ -70,11 +75,16 @@ theme="light"
 
     }
     else{
-      ListContent=(<li className={ListClass}>
-        {transaction.text}<span>{sign}₹{Math.abs(transaction.amount)}</span><button className='delete-btn' onClick={()=>{dispatch({
+      let history;
+      if(mouseIn){
+        history=(<div id='history'><strong>Dated:</strong>{transaction.date}</div>);
+      }
+      ListContent=(<li className={ListClass} onMouseOver={()=>{setMouseIN(true)}} onMouseOut={()=>{setMouseIN(false)}} >
+        <span id="text">{transaction.text}</span><span id='amount'>{sign}₹{Math.abs(transaction.amount)}</span><button className='delete-btn' onClick={()=>{dispatch({
 type: 'DELETE',
 payload:transaction.id
 });}}>x</button><button onClick={()=>{setIsEditing(true)}} className='edit-btn'>edit</button>
+        {history}
     </li>);
     }
 
