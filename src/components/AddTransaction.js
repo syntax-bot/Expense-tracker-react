@@ -1,5 +1,9 @@
 import React,{useContext,useState} from 'react';
 import { Globaldispatch } from '../context/GlobalState';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 let nextId=0;
 const AddTransaction = () => {
     const [text,setText]=useState('');
@@ -11,7 +15,16 @@ const AddTransaction = () => {
     <form id='form' onSubmit={(e)=>{
       e.preventDefault();
       if(text.length===0 || amount.length===0){
-        return;
+        return toast.error('Enter Valid Text and Amount', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       const newTransaction={
         id:nextId++,
@@ -30,7 +43,20 @@ const AddTransaction = () => {
             <input type="number" id="amount" value={amount} onChange={(e)=>setAmount(e.target.value)}  placeholder='Enter amount....'/>
         </div>
         <button  className='btn'>Add transaction</button>
-    </form>  
+    </form>
+    <ToastContainer
+position="top-center"
+autoClose={3000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+     
     </>
   )
 }

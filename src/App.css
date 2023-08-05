@@ -167,3 +167,8 @@ input[type='number'] {
 .list li:hover .delete-btn,.list li:hover .edit-btn,.list li:hover .save-btn{
   opacity: 1;
 }
+
+.minus form input,.plus form input{
+  display: inline;
+  width: 50%;
+}
